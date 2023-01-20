@@ -1,0 +1,22 @@
+name: POST Encrypted Secrets
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  post_secrets:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Encrypt Secrets
+      run: |
+        echo ${{ secrets.DB_HOST }} | openssl enc -aes-256-cbc -a -salt -pass pass:${{ secrets.ENCRYPTION_PASSWORD }} > secret.txt
+
+    - name: POST Secrets
+      run: |
+        curl -X POST -H "Content-Type: application/json" -d '{"secret": "$(cat secret.txt)", "branch": "${{ github.ref }}"}' ${{ secrets.REVIEWHUB_HOST }}
