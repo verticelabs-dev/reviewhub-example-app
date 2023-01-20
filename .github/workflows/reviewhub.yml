@@ -19,4 +19,6 @@ jobs:
 
     - name: POST Secrets
       run: |
-        curl -X POST -H "Content-Type: application/json" -d '{"secret": "$(cat secret.txt)", "branch": "${{ github.ref }}"}' ${{ secrets.REVIEWHUB_HOST }}
+        curl -X POST -H "Content-Type: application/json" -d '{"secret": "$(cat secret.txt)", "branch": "${{ github.ref }}"}' REVIEWHUB_HOS
+      env:
+        REVIEWHUB_HOST: ${{ secrets.REVIEWHUB_HOST }
