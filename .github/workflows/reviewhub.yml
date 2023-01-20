@@ -21,4 +21,4 @@ jobs:
       run: |
         curl -X POST -H "Content-Type: application/json" -d '{"secret": "$(cat secret.txt)", "branch": "${{ github.ref }}"}' REVIEWHUB_HOS
       env:
-        REVIEWHUB_HOST: ${{ secrets.REVIEWHUB_HOST }
+        REVIEWHUB_HOST: ${{ secrets.REVIEWHUB_HOST }}
