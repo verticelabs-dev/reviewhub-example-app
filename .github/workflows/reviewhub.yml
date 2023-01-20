@@ -1,9 +1,9 @@
-name: POST Encrypted Secrets
+name: Ping ReviewHub
 
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   post_secrets:
