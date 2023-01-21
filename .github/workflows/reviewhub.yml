@@ -12,13 +12,9 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: Encrypt Secrets
-      run: |
-        echo ${{ secrets.DB_HOST }} | openssl enc -aes-256-cbc -a -salt -pass pass:${{ secrets.ENCRYPTION_PASSWORD }} > secret.txt
-
     - name: POST Secrets
       run: |
+        echo ${{ secrets.DB_HOST }} | openssl enc -aes-256-cbc -a -salt -pass pass:${{ secrets.ENCRYPTION_PASSWORD }} > secret.txt
         curl -X POST -H "Content-Type: application/json" -d "$(cat secret.txt)" "${{ secrets.REVIEWHUB_HOST }}"
       env:
         REVIEWHUB_HOST: ${{ secrets.REVIEWHUB_HOST }}
