@@ -11,7 +11,7 @@ const app = express();
 app.get("/", (req, res) => {
   console.log("request was received");
 
-  res.send("Hello World from New PR2!!");
+  res.send("Hello World from Beta Branch!!");
 });
 
 app.listen(PORT, HOST, () => {
